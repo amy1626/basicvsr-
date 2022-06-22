@@ -1,0 +1,106 @@
+nohup: ignoring input
+/usr/local/lib/python3.8/dist-packages/torch/distributed/launch.py:178: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use_env is set by default in torchrun.
+If your script expects `--local_rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+Traceback (most recent call last):
+  File "./tools/train.py", line 149, in <module>
+    main()
+  File "./tools/train.py", line 61, in main
+    cfg = Config.fromfile(args.config)
+  File "/usr/local/lib/python3.8/dist-packages/mmcv/utils/config.py", line 337, in fromfile
+    cfg_dict, cfg_text = Config._file2dict(filename,
+  File "/usr/local/lib/python3.8/dist-packages/mmcv/utils/config.py", line 207, in _file2dict
+    mod = import_module(temp_module_name)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/tmp/tmpjsqvv0cu/tmprjw6b72s.py", line 165, in <module>
+NameError: name 'work_dirs' is not defined
+Traceback (most recent call last):
+  File "./tools/train.py", line 149, in <module>
+    main()
+  File "./tools/train.py", line 61, in main
+    cfg = Config.fromfile(args.config)
+  File "/usr/local/lib/python3.8/dist-packages/mmcv/utils/config.py", line 337, in fromfile
+    cfg_dict, cfg_text = Config._file2dict(filename,
+  File "/usr/local/lib/python3.8/dist-packages/mmcv/utils/config.py", line 207, in _file2dict
+    mod = import_module(temp_module_name)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/tmp/tmpw_t12cx3/tmp7s1u6_7y.py", line 165, in <module>
+NameError: name 'work_dirs' is not defined
+Exception ignored in: <function _TemporaryFileCloser.__del__ at 0x7f625d898040>
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/tempfile.py", line 580, in __del__
+    self.close()
+  File "/usr/lib/python3.8/tempfile.py", line 576, in close
+    unlink(self.name)
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpjsqvv0cu/tmprjw6b72s.py'
+Exception ignored in: <function _TemporaryFileCloser.__del__ at 0x7f7c5c231040>
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/tempfile.py", line 580, in __del__
+    self.close()
+  File "/usr/lib/python3.8/tempfile.py", line 576, in close
+    unlink(self.name)
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpw_t12cx3/tmp7s1u6_7y.py'
+ERROR:torch.distributed.elastic.multiprocessing.api:failed (exitcode: 1) local_rank: 0 (pid: 10209) of binary: /usr/bin/python
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/runpy.py", line 192, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.8/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/usr/local/lib/python3.8/dist-packages/torch/distributed/launch.py", line 193, in <module>
+    main()
+  File "/usr/local/lib/python3.8/dist-packages/torch/distributed/launch.py", line 189, in main
+    launch(args)
+  File "/usr/local/lib/python3.8/dist-packages/torch/distributed/launch.py", line 174, in launch
+    run(args)
+  File "/usr/local/lib/python3.8/dist-packages/torch/distributed/run.py", line 715, in run
+    elastic_launch(
+  File "/usr/local/lib/python3.8/dist-packages/torch/distributed/launcher/api.py", line 131, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/usr/local/lib/python3.8/dist-packages/torch/distributed/launcher/api.py", line 245, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+./tools/train.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2022-04-29_17:47:07
+  host      : 62c66fa9c7cd
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 10210)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2022-04-29_17:47:07
+  host      : 62c66fa9c7cd
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 10209)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

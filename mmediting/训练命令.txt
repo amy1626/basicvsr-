@@ -1,0 +1,75 @@
+训练edvr命令
+./tools/dist_train.sh configs/restorers/edvr/edvrm_x4_g8_600k_reds.py 2
+
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,6,7 
+
+训练BasicVSR++命令
+./tools/dist_train.sh configs/restorers/basicvsr_plusplus/basicvsr_plusplus_c64n7_8x1_600k_reds4.py 2
+
+训练TDAN命令
+./tools/dist_train.sh configs/restorers/tdan/tdan_1080p_bix4_lr1e-4_400k.py 2
+./tools/dist_train.sh configs/restorers/tdan/tdan_trans_bix4_lr1e-4_400k.py 2
+
+
+
+4K数据训练
+./tools/dist_train.sh configs/restorers/basicvsr_plusplus/basicvsr_plusplus_c64n7_8x1_600k_reds4.py 2
+
+
+
+推理命令
+1、推理tdan		Vid4
+
+python tools/test.py \
+	--config configs/restorers/tdan/tdan_1080p_bix4_lr1e-4_400k.py \
+	--checkpoint pretrained_model/tdan_vimeo90k_bix4_20210528-739979d9.pth \
+	--out work_dirs/example_exp/results_tdan_Vid4.pkl \
+	--save-path work_dirs/example_exp/results_tdan_Vid4/
+
+推理TDAN		test1080p
+
+python tools/test.py \
+	--config configs/restorers/tdan/tdan_1080p_bix4_lr1e-4_400k.py \
+	--checkpoint pretrained_model/tdan_vimeo90k_bix4_20210528-739979d9.pth \
+	--out work_dirs/example_exp/results_tdan_1080p.pkl \
+	--save-path work_dirs/example_exp/results_tdan_1080p/
+
+2、推理EDVR		Vid4
+
+python tools/test.py \
+	--config configs/restorers/edvr/edvrm_x4_g8_600k_1080p.py \
+	--checkpoint pretrained_model/edvrm_x4_8x4_600k_reds_20210625-e29b71b5.pth \
+	--out work_dirs/example_exp/results_EDVRm_Vid4.pkl \
+	--save-path work_dirs/example_exp/results_EDVRm_Vid4/
+
+
+推理EDVR		test-1080p
+python tools/test.py \
+	--config configs/restorers/edvr/edvrm_x4_g8_600k_1080p.py \
+	--checkpoint pretrained_model/edvrm_x4_8x4_600k_reds_20210625-e29b71b5.pth \
+	--out work_dirs/example_exp/results_EDVRm_1080p.pkl \
+	--save-path work_dirs/example_exp/results_EDVRm_1080p/
+
+3、推理BasicVSR一个30帧序列
+python tools/test.py \
+	--config configs/restorers/basicvsr_plusplus/basicvsr_plusplus_c64n7_8x1_600k_vid4.py \
+	--checkpoint pretrained_model/basicvsr++iter_600000.pth \
+	--out work_dirs/example_exp/results_basic++test30.pkl \
+	--save-path work_dirs/example_exp/results_basic++test30/
+	
+python tools/test.py \
+	--config configs/restorers/basicvsr_plusplus/basicvsr_plusplus_c64n7_8x1_600k_reds4.py \
+	--checkpoint pretrained_model/iter_75000.pth \
+	--out work_dirs/example_exp/results_basic++shigu03.pkl \
+	--save-path work_dirs/example_exp/results_basic++shigu03/
+
+推理清晰的光照稍好的
+python tools/test.py \
+	--config configs/restorers/basicvsr_plusplus/basicvsr_plusplus_c64n7_8x1_600k_reds4.py \
+	--checkpoint work_dirs/basicvsr_plusplus_c64n7_8x1_600k_reds4/iter_150000.pth \
+	--out work_dirs/example_exp/results_basic++jiaotong.pkl \
+	--save-path work_dirs/example_exp/results_basic++jiaotong/
+
+
+
+
